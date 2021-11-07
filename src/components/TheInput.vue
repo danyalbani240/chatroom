@@ -1,26 +1,27 @@
 <template>
-  <div class="flex flex-col">
-    <label class="text-left" :for="id" v-if="label">{{ label }}</label>
+  <div class="flex flex-col my-3">
+    <label class="text-left" :for="id" v-if="label">{{ label }} :</label>
 
     <input
+      @focus="toggleBorder"
+      @blur="toggleBorder"
       :required="required"
       autocomplete="off"
       :id="id"
       :type="inputType"
-      :class="{
-        'placeholder-white': placeholderWhite,
-        'placeholder-Grey5': !placeholderWhite,
-      }"
       :placeholder="placeholder"
+      :class="{
+        'border-Neutral-Grey3': bluredBorder,
+        'border-Neutral-Grey5': !bluredBorder,
+      }"
       class="
         placeholder-Grey5
         md:w-80
         w-64
         outline-none
         py-3
-        border-b-2 border-Neutral-Grey5
+        border-b-2
         bg-transparent
-        my-3
       "
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
@@ -28,16 +29,16 @@
   </div>
 </template>
 <script>
+import { ref } from "@vue/reactivity";
 export default {
-  props: [
-    "placeholder",
-    "modelValue",
-    "placeholderWhite",
-    "label",
-    "id",
-    "required",
-    "inputType",
-  ],
+  props: ["placeholder", "modelValue", "label", "id", "required", "inputType"],
   emits: ["update:modelValue"],
+  setup() {
+    const bluredBorder = ref(false);
+    const toggleBorder = () => {
+      bluredBorder.value = !bluredBorder.value;
+    };
+    return { toggleBorder, bluredBorder };
+  },
 };
 </script>
