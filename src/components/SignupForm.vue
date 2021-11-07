@@ -1,5 +1,5 @@
 <template>
-  <form class="signup">
+  <form @submit.prevent="handleSignup" class="w-96 overflow-x-hidden signup">
     <TheInput
       label="Name"
       placeholder="Danyal"
@@ -8,7 +8,6 @@
       inputType="text"
       :modelValue="name"
       @update:modelValue="name = $event"
-      placeholderWhite
     />
     <TheInput
       label="Email"
@@ -18,7 +17,6 @@
       inputType="email"
       :modelValue="email"
       @update:modelValue="email = $event"
-      placeholderWhite
     />
     <TheInput
       label="Password"
@@ -28,14 +26,10 @@
       inputType="password"
       :modelValue="password"
       @update:modelValue="password = $event"
-      placeholderWhite
     />
     <div class="mt-10">
       <the-button name="Signup" :next="true" :blue="true" />
     </div>
-    {{ name }}
-    {{ email }}
-    {{ password }}
   </form>
 </template>
 
@@ -50,7 +44,20 @@ export default {
     const name = ref("");
     const email = ref("");
     const password = ref("");
-    return { name, email, password };
+    const handleSignup = () => {
+      if (
+        !!name.value &&
+        !!password.value &&
+        !!email.value &&
+        name.value.length >= 3 &&
+        password.value.length >= 8
+      ) {
+        console.log("ok");
+      } else {
+        console.log("eror");
+      }
+    };
+    return { name, email, password, handleSignup };
   },
 };
 </script>
