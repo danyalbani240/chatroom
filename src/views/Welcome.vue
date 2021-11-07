@@ -1,9 +1,18 @@
 <template>
-  <div class="Welcome">Welcome</div>
+  <div>
+    <div class="Welcome">Welcome</div>
+
+    <div class="flex justify-center mt-20">
+      <signup-form />
+    </div>
+  </div>
 </template>
 
 <script>
-export default {};
+import SignupForm from "../components/SignupForm.vue";
+export default {
+  components: { SignupForm },
+};
 </script>
 
 <style>
