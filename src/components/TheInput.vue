@@ -1,25 +1,26 @@
 <template>
-  <div class="flex items-center flex-col">
-    <label :for="id" v-if="label">{{ label }}</label>
+  <div class="flex flex-col">
+    <label class="text-left" :for="id" v-if="label">{{ label }}</label>
 
     <input
       :required="required"
       autocomplete="off"
       :id="id"
-      type="text"
+      :type="inputType"
       :class="{
         'placeholder-white': placeholderWhite,
-        'placeholder-black': !placeholderWhite,
+        'placeholder-Grey5': !placeholderWhite,
       }"
       :placeholder="placeholder"
       class="
-        placeholder-black
+        placeholder-Grey5
         md:w-80
         w-64
         outline-none
         py-3
         border-b-2 border-Neutral-Grey5
         bg-transparent
+        my-3
       "
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
@@ -35,6 +36,7 @@ export default {
     "label",
     "id",
     "required",
+    "inputType",
   ],
   emits: ["update:modelValue"],
 };
