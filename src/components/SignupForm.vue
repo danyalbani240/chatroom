@@ -37,6 +37,7 @@
 import { ref } from "@vue/reactivity";
 import TheInput from "./TheInput.vue";
 import TheButton from "./TheButton.vue";
+import signup from "../composable/signup";
 
 export default {
   components: { TheInput, TheButton },
@@ -44,7 +45,7 @@ export default {
     const name = ref("");
     const email = ref("");
     const password = ref("");
-    const handleSignup = () => {
+    const handleSignup = async () => {
       if (
         !!name.value &&
         !!password.value &&
@@ -53,6 +54,7 @@ export default {
         password.value.length >= 8
       ) {
         console.log("ok");
+        await signup(email.value, password.value, name.value);
       } else {
         console.log("eror");
       }
