@@ -3,6 +3,8 @@ import { ref } from "@vue/reactivity";
 
 const error = ref("");
 const signup = async (email, password, displayName) => {
+  error.value = null;
+
   try {
     const res = await projectAuth.createUserWithEmailAndPassword(
       email,
