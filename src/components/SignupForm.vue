@@ -9,6 +9,7 @@
       :modelValue="name"
       @update:modelValue="name = $event"
     />
+    <p v-if="nameError" class="text-red-500">{{ nameError }}</p>
     <TheInput
       label="Email"
       placeholder="example@gmail.com"
@@ -18,6 +19,7 @@
       :modelValue="email"
       @update:modelValue="email = $event"
     />
+
     <TheInput
       label="Password"
       placeholder
@@ -27,6 +29,8 @@
       :modelValue="password"
       @update:modelValue="password = $event"
     />
+    <p v-if="passwordError" class="text-red-500">{{ passwordError }}</p>
+
     <div class="mt-10">
       <the-button name="Signup" :next="true" :blue="true" />
     </div>
@@ -45,7 +49,11 @@ export default {
     const name = ref("");
     const email = ref("");
     const password = ref("");
+    const nameError = ref("");
+    const passwordError = ref("");
     const handleSignup = async () => {
+      nameError.value = "";
+      passwordError.value = "";
       if (
         !!name.value &&
         !!password.value &&
@@ -53,13 +61,16 @@ export default {
         name.value.length >= 3 &&
         password.value.length >= 8
       ) {
-        console.log("ok");
         await signup(email.value, password.value, name.value);
-      } else {
-        console.log("eror");
+      } else if (name.value.length < 3) {
+        nameError.value =
+          "the Name value have to be more than three charachter or more";
+      } else if (password.value.length < 7) {
+        passwordError.value =
+          "the Password value have to be more than eight charachter or more";
       }
     };
-    return { name, email, password, handleSignup };
+    return { name, email, password, handleSignup, nameError, passwordError };
   },
 };
 </script>
