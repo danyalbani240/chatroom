@@ -1,5 +1,8 @@
 <template>
   <form @submit.prevent="handleSignup" class="w-96 overflow-x-hidden signup">
+    <div class="px-5 py-10 text-red-700" v-if="error">
+      {{ error }}
+    </div>
     <TheInput
       label="Name"
       placeholder="Danyal"
@@ -41,7 +44,7 @@
 import { ref } from "@vue/reactivity";
 import TheInput from "./TheInput.vue";
 import TheButton from "./TheButton.vue";
-import signup from "../composable/signup";
+import { signup, error } from "../composable/signup";
 
 export default {
   components: { TheInput, TheButton },
@@ -65,12 +68,20 @@ export default {
       } else if (name.value.length < 3) {
         nameError.value =
           "the Name value have to be more than three charachter or more";
-      } else if (password.value.length < 7) {
+      } else if (password.value.length < 8) {
         passwordError.value =
           "the Password value have to be more than eight charachter or more";
       }
     };
-    return { name, email, password, handleSignup, nameError, passwordError };
+    return {
+      name,
+      email,
+      password,
+      handleSignup,
+      nameError,
+      passwordError,
+      error,
+    };
   },
 };
 </script>

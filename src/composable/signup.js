@@ -1,5 +1,7 @@
 import { projectAuth } from "../firebase/config";
+import { ref } from "@vue/reactivity";
 
+const error = ref("");
 const signup = async (email, password, displayName) => {
   try {
     const res = await projectAuth.createUserWithEmailAndPassword(
@@ -11,9 +13,9 @@ const signup = async (email, password, displayName) => {
     }
 
     res.user.updateProfile({ displayName });
-    console.log(res.user)
+    console.log(res.user);
   } catch (err) {
-    console.log(error);
+    error.value = err.message;
   }
 };
-export default signup;
+export { signup, error };
