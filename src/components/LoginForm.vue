@@ -12,7 +12,7 @@
       :modelValue="email"
       @update:modelValue="email = $event"
     />
-    <p v-if="nameError" class="text-red-500">{{ nameError }}</p>
+
 
     <TheInput
       label="Password"
@@ -35,7 +35,6 @@
 import { ref } from "@vue/reactivity";
 import TheInput from "./TheInput.vue";
 import TheButton from "./TheButton.vue";
-const nameError = ref("");
 const passwordError = ref("");
 import { login, error } from "../composable/login";
 export default {
@@ -46,15 +45,18 @@ export default {
     const handleLogin = async () => {
       if (!!password.value && !!email.value && password.value.length >= 8) {
         await login(email.value, password.value);
-      } else if (name.value.length < 3) {
-        nameError.value =
-          "the Name value have to be more than three charachter or more";
+
+        // if There was no error redirect the user to the   chatroom page
+        if (!error.value) {
+          
+          
+        }
       } else if (password.value.length < 8) {
         passwordError.value =
           "the Password value have to be more than eight charachter or more";
       }
     };
-    return { email, password, handleLogin, nameError, passwordError, error };
+    return { email, password, handleLogin, passwordError, error };
   },
 };
 </script>
