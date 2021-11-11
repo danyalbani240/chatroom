@@ -52,9 +52,10 @@ export default {
       type: Boolean,
       required: false,
     },
-    modelValue: {
+    inputType: {
       type: String,
       required: false,
+      default: "text",
     },
   },
   emits: ["update:modelValue"],
