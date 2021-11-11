@@ -21,6 +21,39 @@
 <script>
 export default {
   name: "Button",
-  props: ["name", "blue", "next", "green", "minimal", "red", "white", "tblack"],
+  props: {
+    name: {
+      type: String,
+      required: false,
+    },
+    blue: {
+      type: Boolean,
+      required: false,
+    },
+    next: {
+      type: String,
+      required: false,
+    },
+    green: {
+      type: Boolean,
+      required: false,
+    },
+    minimal: {
+      type: Boolean,
+      required: false,
+    },
+    red: {
+      type: Boolean,
+      required: false,
+    },
+    white: {
+      type: Boolean,
+      required: false,
+    },
+    tblack: {
+      type: Boolean,
+      required: false,
+    },
+  },
 };
 </script>

@@ -31,7 +31,32 @@
 <script>
 import { ref } from "@vue/reactivity";
 export default {
-  props: ["placeholder", "modelValue", "label", "id", "required", "inputType"],
+  props: {
+    placeholder: {
+      type: String,
+      required: false,
+    },
+    modelValue: {
+      type: String,
+      required: false,
+    },
+    label: {
+      type: String,
+      required: false,
+    },
+    id: {
+      type: String,
+      required: false,
+    },
+    required: {
+      type: Boolean,
+      required: false,
+    },
+    modelValue: {
+      type: String,
+      required: false,
+    },
+  },
   emits: ["update:modelValue"],
   setup() {
     const bluredBorder = ref(false);
