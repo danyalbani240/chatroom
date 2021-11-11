@@ -48,7 +48,7 @@ import { signup, error } from "../composable/signup";
 
 export default {
   components: { TheInput, TheButton },
-  setup() {
+  setup(props, context) {
     const name = ref("");
     const email = ref("");
     const password = ref("");
@@ -65,6 +65,10 @@ export default {
         password.value.length >= 8
       ) {
         await signup(email.value, password.value, name.value);
+        // if There was no error redirect the user to the   chatroom page
+        if (!error.value) {
+          context.emit("signup");
+        }
       } else if (name.value.length < 3) {
         nameError.value =
           "the Name value have to be more than three charachter or more";

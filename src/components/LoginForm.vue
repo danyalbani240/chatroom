@@ -39,7 +39,7 @@ const passwordError = ref("");
 import { login, error } from "../composable/login";
 export default {
   components: { TheInput, TheButton },
-  setup() {
+  setup(props,context) {
     const email = ref("");
     const password = ref("");
     const handleLogin = async () => {
@@ -48,7 +48,7 @@ export default {
 
         // if There was no error redirect the user to the   chatroom page
         if (!error.value) {
-          
+          context.emit('login')
           
         }
       } else if (password.value.length < 8) {

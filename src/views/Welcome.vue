@@ -4,16 +4,16 @@
       <h1>Welcome</h1>
       <div class="flex flex-col items-center mt-20">
         <div v-if="showLogin">
-          <LoginForm />
+          <LoginForm @login="enterChat" />
         </div>
         <div v-else>
-          <signup-form />
+          <signup-form @signup="enterChat" />
         </div>
 
         <p v-if="!showLogin">
           <a
             @click.prevent="toggleShowLogin"
-            class="cursor-pointer  underline  font-extrabold text-accent"
+            class="cursor-pointer underline font-extrabold text-accent"
             >Login Form</a
           >
         </p>
@@ -34,6 +34,7 @@ import SignupForm from "../components/SignupForm.vue";
 import LoginForm from "../components/LoginForm.vue";
 import Button from "../components/TheButton.vue";
 import { ref } from "@vue/reactivity";
+import { useRouter } from "vue-router";
 export default {
   components: { SignupForm, LoginForm, Button },
   setup() {
@@ -41,7 +42,11 @@ export default {
     const toggleShowLogin = () => {
       showLogin.value = !showLogin.value;
     };
-    return { showLogin, toggleShowLogin };
+    const router = useRouter();
+    const enterChat = () => {
+      router.push({ name: "chat" });
+    };
+    return { showLogin, toggleShowLogin, enterChat };
   },
 };
 </script>
