@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="handleSignup" class="w-96 overflow-x-hidden signup">
+    <h1 class="text-4xl">Signup</h1>
     <div class="px-5 py-10 text-red-700" v-if="error">
       {{ error }}
     </div>

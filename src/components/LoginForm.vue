@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="handleLogin" class="w-96 overflow-x-hidden login">
-    <div class="px-5 py-10 text-red-700" v-if="error">
+    <h1 class="text-4xl mb-10">Login</h1>
+    <div class="px-5 bg-red-200 py-10 text-red-700" v-if="error">
       {{ error }}
     </div>
     <TheInput

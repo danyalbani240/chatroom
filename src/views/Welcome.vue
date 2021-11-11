@@ -2,7 +2,7 @@
   <div class="bg-primary p-10 min-h-screen">
     <div class="welcome rounded-xl bg-white">
       <h1>Welcome</h1>
-      <div class="flex flex-col items-center mt-20">
+      <div class="flex flex-col items-center ">
         <div v-if="showLogin">
           <LoginForm @login="enterChat" />
         </div>
