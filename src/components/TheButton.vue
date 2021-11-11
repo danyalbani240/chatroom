@@ -31,8 +31,9 @@ export default {
       required: false,
     },
     next: {
-      type: String,
+      type: Boolean,
       required: false,
+      default: false,
     },
     green: {
       type: Boolean,
