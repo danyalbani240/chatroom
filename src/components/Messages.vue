@@ -2,7 +2,7 @@
   <div class="overflow-y-scroll bg-Neutral-Grey6 flex-1" v-if="documents">
     <div
       class="mx-5 flex justify-start mt-10"
-      v-for="doc in documents"
+      v-for="doc in messagesWithNewTime"
       :key="doc.id"
     >
       <div
@@ -19,15 +19,20 @@
       >
         <span class="text-Neutral-Green">{{ doc.name }} :</span>
         <span
-
           :class="{
             'text-white': user.displayName == doc.name,
             'text-primary': user.displayName != doc.name,
-          }"
-          
+          }" class="text-lg"
           >{{ doc.message }}</span
         >
-        <span></span>
+        <span
+          :class="{
+            'text-Neutral-Grey6': user.displayName == doc.name,
+            'text-primary': user.displayName != doc.name,
+          }"
+          class="text-xs font-extalight"
+          >{{ doc.created }} ago</span
+        >
       </div>
     </div>
   </div>
@@ -36,11 +41,20 @@
 <script>
 import getCollection from "../composable/getCollection";
 import { user } from "../composable/getUser";
+import { formatDistanceToNow } from "date-fns";
+import { computed } from "vue";
 export default {
   setup() {
     const { documents } = getCollection("messages");
-    console.log(user.displayName);
-    return { documents, user };
+    const messagesWithNewTime = computed(() => {
+      if (documents.value) {
+        return documents.value.map((doc) => {
+          let time = formatDistanceToNow(doc.created.toDate());
+          return { ...doc, created: time };
+        });
+      }
+    });
+    return { documents, user, messagesWithNewTime };
   },
 };
 </script>
