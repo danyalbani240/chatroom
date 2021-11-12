@@ -1,6 +1,6 @@
 <template>
   <div class="bg-primary h-screen p-10 w-screen">
-    <div class="bg-white h-full rounded-xl w-full">
+    <div class="bg-white flex flex-col justify-between h-full rounded-xl w-full">
       <Navbar />
       <ChatField />
     </div>
