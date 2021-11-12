@@ -19,15 +19,19 @@
       >
         <span class="text-Neutral-Green">{{ doc.name }} :</span>
         <span
-
           :class="{
             'text-white': user.displayName == doc.name,
             'text-primary': user.displayName != doc.name,
           }"
-          
           >{{ doc.message }}</span
         >
-        <span></span>
+        <span
+          :class="{
+            'text-Neutral-Grey6': user.displayName == doc.name,
+            'text-primary': user.displayName != doc.name,
+          }"
+          >{{ doc.created.toDate() }}</span
+        >
       </div>
     </div>
   </div>
