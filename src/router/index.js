@@ -12,11 +12,21 @@ const requiredLogin = (to, from, next) => {
   }
 };
 
+const requiredNoAuth = (to, from, next) => {
+  let user = projectAuth.currentUser;
+  if (user) {
+    next({ name: "chat" });
+  } else {
+    next();
+  }
+};
+
 const routes = [
   {
     path: "/",
     name: "Welcome",
     component: Welcome,
+    beforeEnter: requiredNoAuth,
   },
   {
     path: "/chat",
