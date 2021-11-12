@@ -1,5 +1,9 @@
 <template>
-  <div class="overflow-y-scroll bg-Neutral-Grey6 flex-1" v-if="documents">
+  <div
+    class="overflow-y-scroll bg-Neutral-Grey6 flex-1"
+    ref="messages"
+    v-if="documents"
+  >
     <div
       class="mx-5 flex justify-start mt-10"
       v-for="doc in messagesWithNewTime"
@@ -22,7 +26,8 @@
           :class="{
             'text-white': user.displayName == doc.name,
             'text-primary': user.displayName != doc.name,
-          }" class="text-lg"
+          }"
+          class="text-lg"
           >{{ doc.message }}</span
         >
         <span
@@ -42,7 +47,7 @@
 import getCollection from "../composable/getCollection";
 import { user } from "../composable/getUser";
 import { formatDistanceToNow } from "date-fns";
-import { computed } from "vue";
+import { computed, onUpdated, ref } from "vue";
 export default {
   setup() {
     const { documents } = getCollection("messages");
@@ -54,7 +59,13 @@ export default {
         });
       }
     });
-    return { documents, user, messagesWithNewTime };
+
+    //auto scroll down to last message
+    const messages = ref(null);
+    onUpdated(() => {
+      messages.value.scrollTop = messages.value.scrollHeight;
+    });
+    return { documents, user, messagesWithNewTime, messages };
   },
 };
 </script>
