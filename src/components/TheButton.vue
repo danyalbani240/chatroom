@@ -13,7 +13,10 @@
     }"
   >
     {{ name }}
-    <div class="inline-block ml-4" :class="{ hidden: !next }">
+    <div
+      class="inline-block"
+      :class="{ hidden: !next, 'ml-0': justButton, 'ml-4': !justButton }"
+    >
       <img src="../assets/next.png" alt="" />
     </div>
   </button>
@@ -52,6 +55,10 @@ export default {
       required: false,
     },
     tblack: {
+      type: Boolean,
+      required: false,
+    },
+    justButton: {
       type: Boolean,
       required: false,
     },
