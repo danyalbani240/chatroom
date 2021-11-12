@@ -12,4 +12,6 @@ const getCollection = (collection) => {
     });
     documents.value = results;
   });
+  return { documents };
 };
+export default getCollection;
