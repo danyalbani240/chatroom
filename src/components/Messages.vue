@@ -40,6 +40,7 @@
 <script>
 import getCollection from "../composable/getCollection";
 import { user } from "../composable/getUser";
+import { formatDistanceToNow } from "date-fns";
 export default {
   setup() {
     const { documents } = getCollection("messages");
